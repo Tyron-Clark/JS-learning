@@ -4,22 +4,17 @@ const todosList = document.getElementById("todos");
 let todos = [];
 
 addTodo.addEventListener("click", (e) => {
-  // Get and validate input
   const inputValue = todoInput.value.trim();
-  // If no value..
   if (!inputValue) return;
 
-  // Add to empty todos array and clear input value
   todos.push(inputValue);
   todoInput.value = "";
+  renderTodos();
+});
 
-  // Clear todoList before rebuilding,
-  // Without this, todoList returns every entered input value
+function renderTodos() {
   todosList.innerHTML = "";
 
-  console.log(todos);
-
-  // Create list items for todos
   todos.forEach((todoText, index) => {
     const todoItem = document.createElement("li");
     todoItem.className =
@@ -27,7 +22,7 @@ addTodo.addEventListener("click", (e) => {
 
     const position = document.createElement("span");
     position.className = "flex-1";
-    position.textContent = index + 1; // Show position in array +1
+    position.textContent = index + 1;
 
     const taskName = document.createElement("span");
     taskName.className = "flex-3";
@@ -35,32 +30,48 @@ addTodo.addEventListener("click", (e) => {
 
     const status = document.createElement("select");
     status.className = "flex-1";
-
-    // Options for select dropdown
+    // Status options
     const options = [
       { value: "pending", text: "Pending" },
       { value: "in-progress", text: "In Progress" },
       { value: "completed", text: "Completed" },
     ];
-
-    // Loop over options and add to select dropdown
     options.forEach((option) => {
-      const optionElement = document.createElement("option");
-      optionElement.value = option.value;
-      optionElement.textContent = option.text;
-      status.appendChild(optionElement);
+      const opt = document.createElement("option");
+      opt.value = option.value;
+      opt.textContent = option.text;
+      status.appendChild(opt);
     });
 
+    // Edit Button
     const edit = document.createElement("button");
     edit.className = "flex-1 text-blue-500";
     edit.textContent = "Edit";
+    edit.addEventListener("click", () => editTodo(index));
 
+    // Remove Button
     const remove = document.createElement("button");
     remove.className = "flex-1 text-red-500";
     remove.textContent = "Remove";
+    remove.addEventListener("click", () => removeTodo(index));
 
-    // Append all elements together
     todoItem.append(position, taskName, status, edit, remove);
     todosList.appendChild(todoItem);
   });
-});
+}
+
+function removeTodo(index) {
+  todos.splice(index, 1);
+  renderTodos();
+}
+
+function editTodo(index) {
+  const newText = prompt("Edit your todo:", todos[index]);
+  if (newText !== null) {
+    todos[index] = newText.trim();
+    renderTodos();
+  }
+}
+
+// Initial render if needed
+renderTodos();
