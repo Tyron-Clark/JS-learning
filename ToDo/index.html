@@ -10,33 +10,31 @@
     <h1 class="text-6xl">Basic TODO</h1>
 
     <div id="container" class="mt-20">
-      <form action="">
-        <button
-          id="add-todo"
-          type="submit"
-          class="border-1 rounded-md p-1 cursor-pointer"
-        >
-          Add ToDo
-        </button>
-        <input
-          type="text"
-          name="newTodo"
-          id="todoInput"
-          class="border-1 p-1 rounded-md"
-        />
+      <button
+        id="addTodo"
+        type="submit"
+        class="border-1 rounded-md p-1 cursor-pointer"
+      >
+        Add ToDo
+      </button>
+      <input
+        type="text"
+        name="newTodo"
+        id="todoInput"
+        class="border-1 p-1 rounded-md"
+      />
 
-        <div
-          id="list-container"
-          class="text-center flex justify-between border-b-1 mt-3"
-        >
-          <span class="flex-1">#</span>
-          <span class="flex-3">Task Name</span>
-          <span class="flex-1">Status</span>
-          <span class="flex-1">Edit</span>
-          <span class="flex-1">Remove</span>
-        </div>
-        <ul></ul>
-      </form>
+      <div
+        id="list-container"
+        class="text-center flex justify-between border-b-1 mt-3"
+      >
+        <span class="flex-1">#</span>
+        <span class="flex-3">Task Name</span>
+        <span class="flex-1">Status</span>
+        <span class="flex-1">Edit</span>
+        <span class="flex-1">Remove</span>
+      </div>
+      <ul id="todos"></ul>
     </div>
     <script src="script.js"></script>
   </body>
